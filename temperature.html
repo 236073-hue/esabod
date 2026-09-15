@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Temperature Monitoring - Smart Feeder</title><link rel="stylesheet" href="style.css" /><link rel="manifest" href="manifest.webmanifest" /><meta name="theme-color" content="#695bd5" /><script type="module" src="app.js"></script></head>
+<body class="dashboard-body monitor-page" data-page="temperature">
+  <main class="dashboard-shell"><header class="dashboard-header"><a class="brand" href="dashboard.html"><span class="brand-mark">●</span> Smart Feeder</a><nav class="dashboard-nav" aria-label="Monitoring pages"><a href="feed.html">Feed</a><a href="water.html">Water</a><a class="active" href="temperature.html">Temperature</a><a href="alerts.html">Alerts</a></nav><div class="user-area"><span id="userEmail">Loading account...</span><button class="text-button" id="logoutBtn">Log out</button></div></header>
+    <section class="dashboard-intro"><div><p class="eyebrow">TEMPERATURE MONITORING</p><h1>Coop temperature</h1><p class="dashboard-subtitle">Keep the environment within the recommended range for your chicks.</p></div></section>
+    <section class="monitoring-grid"><article class="metric-card"><div class="metric-icon temp-icon">°</div><p>Current temperature</p><strong id="temperatureLevel">27.4°C</strong><small id="temperatureLabel">Recommended range: 24–30°C</small><div class="metric-footer online" id="temperatureStatus">Within range</div></article><article class="metric-card"><div class="metric-icon wifi-icon">⌁</div><p>Sensor status</p><strong>Online</strong><small>Last checked just now</small><div class="metric-footer online">● Connected</div></article></section>
+    <section class="panel"><div class="panel-heading"><div><p class="eyebrow">TEMPERATURE ALERTS</p><h2>Environment status</h2></div><span class="alert-count">Normal</span></div><div class="alert-list"><p class="empty-state">Temperature is currently within the recommended range.</p></div></section>
+  </main><div class="toast" id="toast" role="status"></div><script type="module" src="monitor.js"></script>
+</body></html>

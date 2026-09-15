@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard - Smart Feeder</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="dashboard">
+    <header class="dashboard-header">
+      <h1>Smart Feeder</h1>
+      <div>
+        <span class="user-email" id="userEmail"></span>
+        <button id="logoutBtn">Log out</button>
+      </div>
+    </header>
+
+    <section class="status-card">
+      <h2>Device status</h2>
+      <ul id="statusList">
+        <li>Loading...</li>
+      </ul>
+    </section>
+
+    <section class="schedule-form">
+      <h2>Add feeding time</h2>
+      <form id="scheduleForm">
+        <div class="form-row">
+          <label for="day">Day</label>
+          <select id="day">
+            <option>Sun</option>
+            <option selected>Mon</option>
+            <option>Tue</option>
+            <option>Wed</option>
+            <option>Thu</option>
+            <option>Fri</option>
+            <option>Sat</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label for="time">Time</label>
+          <input id="time" type="time" value="08:00" required />
+        </div>
+        <div class="form-row">
+          <label for="portion">Portion (scoops)</label>
+          <input id="portion" type="number" min="1" max="5" value="1" required />
+        </div>
+        <button type="submit" id="addScheduleBtn">Add schedule</button>
+      </form>
+    </section>
+
+    <section class="schedule-list">
+      <h2>Upcoming feedings</h2>
+      <ul id="scheduleList">
+        <li>No schedules yet.</li>
+      </ul>
+    </section>
+  </div>
+
+  <script type="module" src="dashboard.js"></script>
+</body>
+</html>

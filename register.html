@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register - Smart Feeder</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#695bd5" />
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <div class="auth-page">
+    <form class="auth-card" id="registerForm">
+      <h1>Create account</h1>
+      <label for="email">Email</label>
+      <input id="email" type="email" required />
+      <label for="password">Password</label>
+      <input id="password" type="password" required />
+      <label for="confirmPassword">Confirm password</label>
+      <input id="confirmPassword" type="password" required />
+      <p class="error" id="errorMsg"></p>
+      <button type="submit" id="submitBtn">Register</button>
+      <p class="switch-link">Already have an account? <a href="login.html">Log in</a></p>
+    </form>
+  </div>
+
+  <script type="module" src="register.js"></script>
+</body>
+</html>
