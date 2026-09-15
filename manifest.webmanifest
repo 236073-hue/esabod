@@ -1,15 +1,15 @@
 {
-  "name": "Smart Feeder",
-  "short_name": "Smart Feeder",
+  "name": "ESABOD",
+  "short_name": "ESABOD",
   "description": "Monitor chick feed, water, temperature, and alerts.",
   "start_url": "dashboard.html",
   "display": "standalone",
   "background_color": "#f5f7fb",
   "theme_color": "#695bd5",
   "icons": [{
-    "src": "icon.svg",
-    "sizes": "any",
-    "type": "image/svg+xml",
+    "src": "LOGO.jpg",
+    "sizes": "512x512",
+    "type": "image/jpeg",
     "purpose": "any maskable"
   }]
 }

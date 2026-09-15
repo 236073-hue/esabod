@@ -1,11 +1,172 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Feed Monitoring - Smart Feeder</title><link rel="stylesheet" href="style.css" /><link rel="manifest" href="manifest.webmanifest" /><meta name="theme-color" content="#695bd5" /><script type="module" src="app.js"></script></head>
+<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Feed Monitoring - ESABOD</title><link rel="icon" type="image/jpeg" href="LOGO.jpg" /><link rel="apple-touch-icon" href="LOGO.jpg" /><link rel="stylesheet" href="style.css" /><link rel="manifest" href="manifest.webmanifest" /><meta name="theme-color" content="#695bd5" /><script type="module" src="app.js"></script></head>
 <body class="dashboard-body monitor-page" data-page="feed">
-  <main class="dashboard-shell"><header class="dashboard-header"><a class="brand" href="dashboard.html"><span class="brand-mark">●</span> Smart Feeder</a><nav class="dashboard-nav" aria-label="Monitoring pages"><a class="active" href="feed.html">Feed</a><a href="water.html">Water</a><a href="temperature.html">Temperature</a><a href="alerts.html">Alerts</a></nav><div class="user-area"><span id="userEmail">Loading account...</span><button class="text-button" id="logoutBtn">Log out</button></div></header>
+  <main class="dashboard-shell"><header class="dashboard-header"><a class="brand" href="dashboard.html"><img class="brand-logo-img" src="LOGO.jpg" alt="ESABOD" /> ESABOD</a><nav class="dashboard-nav" aria-label="Monitoring pages"><a class="active" href="feed.html">Feed</a><a href="water.html">Water</a><a href="temperature.html">Temperature</a><a href="alerts.html">Alerts</a></nav><div class="user-area"><span id="userEmail">Loading account...</span><button class="text-button" id="logoutBtn">Log out</button></div></header>
     <section class="dashboard-intro"><div><p class="eyebrow">FEED MONITORING</p><h1>Automatic feeding</h1><p class="dashboard-subtitle">Set your batch size and follow the timed feeding program.</p></div><button class="feed-now" id="feedNowBtn"><span>+</span> Feed now</button></section>
-    <section class="batch-panel panel"><div class="panel-heading"><div><p class="eyebrow">BATCH SETUP</p><h2>How many chicks are in this batch?</h2></div><span class="batch-saved" id="batchSaved">Not saved yet</span></div><form class="batch-form" id="batchForm"><label for="chickCount">Number of chicks</label><div class="batch-controls"><input id="chickCount" type="number" min="1" max="100000" value="50" required /><button class="feed-now" type="submit">Calculate plan</button></div><p class="form-help">The 45-day program uses three automatic feedings per day.</p></form></section>
-    <section class="monitoring-grid"><article class="metric-card"><div class="metric-icon bowl-icon">◒</div><p>Feed level</p><strong id="foodLevel">Waiting for scale</strong><div class="progress"><span id="foodProgress" style="width:0%"></span></div><small id="foodLabel">Live scale measurement</small><div class="metric-footer" id="feedStatus">Waiting for ESP32</div><small id="foodMeasuredAt"></small></article><article class="metric-card"><div class="metric-icon clock-icon">◷</div><p>Next automatic feed</p><strong id="nextFeed">6:00 PM</strong><small id="nextFeedAmount">Set up a batch first</small><div class="metric-footer online">Automatic · Active</div></article></section>
+
+    <!-- PRIORITIZED LIVE FEED LEVEL HERO SECTION -->
+    <section class="feed-hero-section">
+      <article class="feed-hero-card" id="feedLevelCard">
+        <div class="feed-hero-top">
+          <div class="feed-hero-title-wrap">
+            <span class="metric-icon bowl-icon hero-bowl-icon">◒</span>
+            <div>
+              <span class="feed-hero-eyebrow">LIVE SCALE SENSOR</span>
+              <h2 class="feed-hero-title">Current Feed Level</h2>
+            </div>
+          </div>
+          <div class="feed-hero-status-wrap">
+            <span class="feed-level-tag" id="feedLevelTag" style="display:none"></span>
+            <div class="metric-footer" id="feedStatus">Waiting for ESP32</div>
+          </div>
+        </div>
+
+        <div class="feed-hero-main">
+          <div class="feed-hero-value-wrap">
+            <strong id="foodLevel" class="feed-hero-number">Waiting for scale</strong>
+            <p id="foodLabel" class="feed-hero-sub">Waiting for scale</p>
+          </div>
+          <div class="feed-hero-bar-wrap">
+            <div class="progress hero-progress"><span id="foodProgress" style="width:0%"></span></div>
+            <div class="feed-hero-meta">
+              <span id="foodMeasuredAt">Waiting for scale</span>
+              <span class="feed-capacity-meta">Capacity: 10.000 kg</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="feed-hero-card feed-next-hero-card">
+        <div class="feed-hero-top">
+          <div class="feed-hero-title-wrap">
+            <span class="metric-icon clock-icon hero-bowl-icon">◷</span>
+            <div>
+              <span class="feed-hero-eyebrow">TIMED DISPENSING</span>
+              <h2 class="feed-hero-title">Next Scheduled Feed</h2>
+            </div>
+          </div>
+          <div class="metric-footer online">● Automatic</div>
+        </div>
+
+        <div class="feed-hero-main">
+          <strong id="nextFeed" class="feed-next-number">6:00 PM</strong>
+          <p id="nextFeedAmount" class="feed-next-sub">Set up a batch first</p>
+          <div class="feed-next-routine">
+            <span>🌅 7:00 AM Breakfast</span>
+            <span>☀️ 12:00 PM Lunch</span>
+            <span>🌙 6:00 PM Dinner</span>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="batch-panel panel"><div class="panel-heading"><div><p class="eyebrow">BATCH SETUP & FLOCK SIZE</p><h2>How many chicks are in this batch?</h2></div><span class="batch-saved" id="batchSaved">Saved to account</span></div>
+      <form class="batch-form" id="batchForm">
+        <div class="batch-ux-container">
+          <div class="batch-stepper-row">
+            <label for="chickCount" class="batch-label">Number of birds / flock size</label>
+            <div class="stepper-controls">
+              <button type="button" class="stepper-btn" id="sub10Btn" title="Decrease 10">−10</button>
+              <button type="button" class="stepper-btn" id="sub1Btn" title="Decrease 1">−1</button>
+              <input id="chickCount" type="number" min="1" max="100000" value="100" required />
+              <button type="button" class="stepper-btn" id="add1Btn" title="Increase 1">+1</button>
+              <button type="button" class="stepper-btn" id="add10Btn" title="Increase 10">+10</button>
+            </div>
+          </div>
+          <div class="batch-presets-row">
+            <span class="presets-label">Quick select presets:</span>
+            <div class="preset-pills">
+              <button type="button" class="preset-pill" data-count="25">25 birds</button>
+              <button type="button" class="preset-pill" data-count="50">50 birds</button>
+              <button type="button" class="preset-pill active" data-count="100">100 birds</button>
+              <button type="button" class="preset-pill" data-count="200">200 birds</button>
+              <button type="button" class="preset-pill" data-count="500">500 birds</button>
+              <button type="button" class="preset-pill" data-count="1000">1,000 birds</button>
+            </div>
+          </div>
+          <div class="batch-stage-row">
+            <label for="batchStageSelect" class="batch-label">Current flock stage / age</label>
+            <select id="batchStageSelect" class="batch-stage-select">
+              <option value="0" selected>Days 1–7 (Week 1) · Starter feeds (15–20g/bird)</option>
+              <option value="1">Days 8–14 (Week 2) · Starter feeds (25–30g/bird)</option>
+              <option value="2">Days 15–21 (Week 3) · Grower feeds (35–40g/bird)</option>
+              <option value="3">Days 22–28 (Week 4) · Grower feeds (45–50g/bird)</option>
+              <option value="4">Days 29–35 (Week 5) · Finisher feeds (60–65g/bird)</option>
+              <option value="5">Days 36–42 (Week 6) · Finisher feeds (70–75g/bird)</option>
+              <option value="6">Days 43–45 (Final 3 days) · Finisher feeds (80–85g/bird)</option>
+            </select>
+            <button class="feed-now save-batch-btn" type="submit" id="saveBatchBtn">Save Batch Size</button>
+          </div>
+        </div>
+      </form>
+    </section>
+
+    <!-- Feed Requirements Breakdown Summary Cards -->
+    <section class="feed-summary-grid">
+      <article class="feed-summary-card starter">
+        <div class="feed-card-header"><span class="feed-badge starter">Starter Feeds</span><span class="feed-period">Days 1–14 (2 wks)</span></div>
+        <div class="feed-card-metric"><strong id="starterTotalKg">28.000 – 35.000 kg</strong><small>Total starter feed needed</small></div>
+        <div class="feed-card-footer" id="starterDailyRange">1.500 – 3.000 kg/day</div>
+      </article>
+      <article class="feed-summary-card grower">
+        <div class="feed-card-header"><span class="feed-badge grower">Grower Feeds</span><span class="feed-period">Days 15–28 (2 wks)</span></div>
+        <div class="feed-card-metric"><strong id="growerTotalKg">56.000 – 63.000 kg</strong><small>Total grower feed needed</small></div>
+        <div class="feed-card-footer" id="growerDailyRange">3.500 – 5.000 kg/day</div>
+      </article>
+      <article class="feed-summary-card finisher">
+        <div class="feed-card-header"><span class="feed-badge finisher">Finisher Feeds</span><span class="feed-period">Days 29–45 (17 days)</span></div>
+        <div class="feed-card-metric"><strong id="finisherTotalKg">115.000 – 123.500 kg</strong><small>Total finisher feed needed</small></div>
+        <div class="feed-card-footer" id="finisherDailyRange">6.000 – 8.500 kg/day</div>
+      </article>
+      <article class="feed-summary-card program-total">
+        <div class="feed-card-header"><span class="feed-badge total">45-Day Total</span><span class="feed-period">Full batch cycle</span></div>
+        <div class="feed-card-metric"><strong id="grandTotalKg">199.000 – 221.500 kg</strong><small>Total feed stock required</small></div>
+        <div class="feed-card-footer" id="flockSummaryFooter">Calculated for 100 birds</div>
+      </article>
+    </section>
+
+    <!-- Detailed 45-Day Feeding Schedule Table -->
+    <section class="panel feed-schedule-table-panel">
+      <div class="panel-heading">
+        <div><p class="eyebrow">DAILY FEEDING PROGRAM</p><h2>45-Day Feeding Schedule by Age & Feeds</h2></div>
+        <span class="plan-total" id="scheduleTotalSubtitle">100 birds</span>
+      </div>
+      <p class="form-help">Rations are distributed across 3 automatic feedings per day (7:00 AM Breakfast, 12:00 PM Lunch, 6:00 PM Dinner).</p>
+      <div class="table-responsive">
+        <table class="feeding-table">
+          <thead>
+            <tr>
+              <th>Age / Period</th>
+              <th>Stage</th>
+              <th>Feed Type</th>
+              <th>Rate / Bird</th>
+              <th>Daily Batch Total</th>
+              <th>Per Meal (3x Daily)</th>
+              <th>Stage Total</th>
+            </tr>
+          </thead>
+          <tbody id="feedingScheduleBody">
+            <!-- Dynamically populated rows -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel esp32-device-panel" id="devicePanel">
+      <div class="panel-heading"><div><p class="eyebrow">HARDWARE LINK</p><h2>ESP32 Scale Credentials</h2></div><span class="batch-saved" id="deviceStatusBadge">Auto-generated</span></div>
+      <p class="form-help">Copy these credentials directly into your ESP32 Arduino code to link your scale with this account.</p>
+      <div class="device-keys-grid">
+        <div class="key-field">
+          <label for="devIdInput">DEVICE_ID</label>
+          <div class="key-input-row"><input type="text" id="devIdInput" readonly value="Loading..." /><button type="button" class="copy-key-btn" id="copyDevIdBtn">Copy</button></div>
+        </div>
+        <div class="key-field">
+          <label for="devSecretInput">DEVICE_SECRET</label>
+          <div class="key-input-row"><input type="password" id="devSecretInput" readonly value="Loading..." /><button type="button" class="copy-key-btn" id="toggleSecretBtn">Show</button><button type="button" class="copy-key-btn" id="copyDevSecretBtn">Copy</button></div>
+        </div>
+      </div>
+    </section>
     <section class="panel"><div class="panel-heading"><div><p class="eyebrow">AUTOMATIC FEEDING</p><h2>Daily feed times</h2></div><span class="plan-total" id="planTotal">Set up a batch</span></div><div class="schedule-list" id="scheduleList"><p class="empty-state">Enter the number of chicks to generate the plan.</p></div></section>
   </main><div class="toast" id="toast" role="status"></div><script type="module" src="monitor.js"></script>
 </body></html>

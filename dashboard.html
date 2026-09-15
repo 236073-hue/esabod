@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard - Smart Feeder</title>
+  <title>Dashboard - ESABOD</title>
+  <link rel="icon" type="image/jpeg" href="LOGO.jpg" />
+  <link rel="apple-touch-icon" href="LOGO.jpg" />
   <link rel="stylesheet" href="style.css" />
   <link rel="manifest" href="manifest.webmanifest" />
   <meta name="theme-color" content="#147d78" />
@@ -12,7 +14,7 @@
 <body class="dashboard-body monitor-page" data-page="overview">
   <main class="dashboard-shell">
     <header class="dashboard-header">
-      <a class="brand" href="dashboard.html"><span class="brand-mark">●</span> Smart Feeder</a>
+      <a class="brand" href="dashboard.html"><img class="brand-logo-img" src="LOGO.jpg" alt="ESABOD" /> ESABOD</a>
       <nav class="dashboard-nav" aria-label="Monitoring pages"><a href="feed.html">Feed</a><a href="water.html">Water</a><a href="temperature.html">Temperature</a><a href="alerts.html">Alerts</a></nav>
       <div class="user-area"><span id="userEmail">Loading account...</span><button class="text-button" id="logoutBtn">Log out</button></div>
     </header>
@@ -22,7 +24,7 @@
       <a class="feed-now" href="calendar.html">Open full calendar</a>
     </section>
 
-    <section class="status-banner" id="statusBanner"><span class="status-dot"></span><div><strong id="statusTitle">Everything looks good</strong><p id="statusText">Smart Feeder is connected and operating normally.</p></div><span class="last-sync" id="lastSync">Updated just now</span></section>
+    <section class="status-banner offline" id="statusBanner"><span class="status-dot offline"></span><div><strong id="statusTitle">Waiting for scale</strong><p id="statusText">Checking ESP32 scale connection...</p></div><span class="last-sync" id="lastSync">Waiting for scale</span></section>
 
     <section class="overview-grid calendar-monitoring-grid">
       <div class="panel overview-calendar-panel"><div class="panel-heading"><div><p class="eyebrow">FEEDING CALENDAR</p><h2 id="calendarMonth">Loading month</h2></div><div class="calendar-controls"><button class="calendar-arrow" id="previousMonth" aria-label="Previous month">‹</button><button class="calendar-arrow" id="nextMonth" aria-label="Next month">›</button></div></div><div class="calendar-weekdays"><span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span></div><div class="calendar-grid" id="calendarGrid"></div><div class="calendar-feed-times"><span>7:00 AM <small>Breakfast</small></span><span>12:00 PM <small>Lunch</small></span><span>6:00 PM <small>Dinner</small></span></div></div>

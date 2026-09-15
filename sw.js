@@ -1,4 +1,4 @@
-const CACHE_NAME = "smart-feeder-shell-v4";
+const CACHE_NAME = "esabod-shell-v5";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -18,7 +18,8 @@ const APP_SHELL = [
   "./monitor.js",
   "./dashboard.js",
   "./manifest.webmanifest",
-  "./icon.svg"
+  "./icon.svg",
+  "./LOGO.jpg"
 ];
 
 self.addEventListener("install", (event) => {

@@ -14,7 +14,7 @@ const addAppSidebar = () => {
     ["calendar.html", "Calendar", "□"]
   ];
   document.body.classList.add("has-sidebar");
-  document.body.insertAdjacentHTML("afterbegin", `<aside class="app-sidebar"><a class="sidebar-brand" href="dashboard.html"><span class="brand-mark">●</span><span>Smart Feeder</span></a><nav class="sidebar-nav" aria-label="Main navigation">${links.map(([href, label, icon]) => `<a class="${href === currentPage ? "active" : ""}" href="${href}"><span class="sidebar-icon">${icon}</span><span>${label}</span></a>`).join("")}</nav><div class="sidebar-footer">Live flock care<br><span>Connected workspace</span></div></aside>`);
+  document.body.insertAdjacentHTML("afterbegin", `<aside class="app-sidebar"><a class="sidebar-brand" href="dashboard.html"><img class="sidebar-logo-img" src="LOGO.jpg" alt="ESABOD" /><span>ESABOD</span></a><nav class="sidebar-nav" aria-label="Main navigation">${links.map(([href, label, icon]) => `<a class="${href === currentPage ? "active" : ""}" href="${href}"><span class="sidebar-icon">${icon}</span><span>${label}</span></a>`).join("")}</nav><div class="sidebar-footer">Live flock care<br><span>Connected workspace</span></div></aside>`);
 };
 
 setConnectionState();
