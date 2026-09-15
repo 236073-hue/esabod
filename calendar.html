@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Calendar - Smart Feeder</title><link rel="stylesheet" href="style.css" /><link rel="manifest" href="manifest.webmanifest" /><meta name="theme-color" content="#695bd5" /><script type="module" src="app.js"></script></head>
+<body class="dashboard-body monitor-page" data-page="calendar">
+  <main class="dashboard-shell"><header class="dashboard-header"><a class="brand" href="dashboard.html"><span class="brand-mark">●</span> Smart Feeder</a><nav class="dashboard-nav" aria-label="Monitoring pages"><a href="feed.html">Feed</a><a href="water.html">Water</a><a href="temperature.html">Temperature</a><a href="alerts.html">Alerts</a><a class="active" href="calendar.html">Calendar</a></nav><div class="user-area"><span id="userEmail">Loading account...</span><button class="text-button" id="logoutBtn">Log out</button></div></header>
+    <section class="dashboard-intro"><div><p class="eyebrow">FEEDING CALENDAR</p><h1>45-day program</h1><p class="dashboard-subtitle">See your automatic feedings by date and time.</p></div></section>
+    <section class="calendar-toolbar panel"><button class="calendar-arrow" id="previousMonth" aria-label="Previous month">‹</button><h2 id="calendarMonth">Loading month</h2><button class="calendar-arrow" id="nextMonth" aria-label="Next month">›</button></section>
+    <section class="panel calendar-panel"><div class="calendar-weekdays"><span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span></div><div class="calendar-grid" id="calendarGrid"></div></section>
+    <section class="panel feed-times-panel"><div class="panel-heading"><div><p class="eyebrow">EVERY DAY</p><h2>Automatic feed times</h2></div><span class="plan-total" id="calendarBatch">Set up a batch on Feed</span></div><div class="calendar-feed-times"><span>7:00 AM <small>Breakfast</small></span><span>12:00 PM <small>Lunch</small></span><span>6:00 PM <small>Dinner</small></span></div></section>
+  </main><div class="toast" id="toast" role="status"></div><script type="module" src="monitor.js"></script>
+</body></html>
